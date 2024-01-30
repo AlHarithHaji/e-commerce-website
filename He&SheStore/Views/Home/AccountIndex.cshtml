@@ -1,0 +1,72 @@
+﻿@model IEnumerable<He_SheStore.Models.AccountBalance>
+
+@{
+    ViewData["Title"] = "AccountIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class='staic-banner'>
+    <div class="container">
+        <h2>Account </h2>
+        <p class="Static-navigation">
+            <a href="/Home/Index">Home</a>
+            <i class="bi bi-chevron-right"></i>
+            <a>Account</a>
+        </p>
+    </div>
+</div>
+<br />
+<br />
+<br />
+
+<div class="container">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title" style="float: left">User Account Detail</h3>
+                        <a asp-action="AddBalanceAmount" style="float: right;" class="btn btn-primary btn-sm">Add new balance</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="ProDataTable" width="100%" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Id</th>
+                                        <th class="text-center">Balance</th>
+                                        <th class="text-center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+
+                                    {
+                                        <tr>
+                                            <td class="text-center">@item.Id</td>
+                                            <td class="text-center">@item.Amount</td>
+                                            <td class="text-center">
+
+                                                <a asp-action="UpdateAmount" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Update Balance</a>
+
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />

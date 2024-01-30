@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Dashborad</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Category</a></li>
+                    <li class="breadcrumb-item active">Index</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title" style="float: left">List of Category</h3>
+                        <a id="btnNew" style="float: right;" class="btn btn-primary btn-sm">Add New Category</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="CategoryDataTable" width="100%" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Category Name</th>
+                                        <th>Action</th>
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modalOpen">
+    <div class="modal-dialog" id="jsAddParty">
+
+
+    </div>
+
+</div>
+
+@section Scripts{
+
+    <script src="~/js/CategoryDataTable.js"></script>
+}
+
+

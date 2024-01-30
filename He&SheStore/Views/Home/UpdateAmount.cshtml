@@ -1,0 +1,58 @@
+﻿@model He_SheStore.Models.AccountBalance
+
+@{
+    ViewData["Title"] = "UpdateAmount";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class='staic-banner'>
+    <div class="container">
+        <h2>Account </h2>
+        <p class="Static-navigation">
+            <a href="/Home/Index">Home</a>
+            <i class="bi bi-chevron-right"></i>
+            <a>Account</a>
+        </p>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<div class="container">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title" style="float: left">Update Balance</h3>
+                    </div>
+                    <div class="card-body">
+                        <form asp-action="UpdateAmount">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="Id" />
+                            <input  type="hidden" asp-for="UserID"/>
+                           
+                            <div class="form-group">
+                                <label asp-for="Amount" class="control-label"></label>
+                                <input asp-for="Amount" class="form-control" />
+                                <span asp-validation-for="Amount" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Update" class="btn btn-warning mt-5" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+

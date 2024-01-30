@@ -1,0 +1,144 @@
+﻿@model IEnumerable<He_SheStore.ViewModel.OrderViewModel>
+
+@{
+    ViewData["Title"] = "ProfitLossReport";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    decimal totalPrice = 0;
+    decimal totalSale = 0;
+}
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Dashborad</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Profit Loss Report</a></li>
+                    <li class="breadcrumb-item active">Index</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title" style="float: left">Profit Loss Report</h3>
+                        <button id="printButton" style="float: right;" class="btn btn-secondary btn-sm">PDF</button>
+                        <button  style="float: right; margin-right:14px;" onclick="downloadExcel()" class="btn btn-success btn-sm" >EXCEL</button>
+                    </div>                  
+                    <section id="sectionToPrint">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="OrderDataTable" width="100%" class="table table-bordered table-striped">
+                                    <thead>
+                                        <h2 class="text-center mb-4">Profit Loss Report</h2>
+                                        <tr>
+                                            <th>Order#</th>
+                                            <th class="text-center">Customer Detail</th>
+                                            <th>Country/City</th>
+                                            <th>Payment Type</th>
+                                            <th>Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td><b>@item.OrderNumber</b> </td>
+                                                <td>
+                                                    <b>Name:</b>
+                                                    @(item.FirstName + " " + item.LastName)
+                                                    <br />
+                                                    <b>Email:</b>
+                                                    @item.CustomerEmail
+                                                    <br />
+                                                    <b>Phone#</b>
+                                                    @item.MobileNumber
+                                                    <br />
+                                                    <b>Adress:</b>
+                                                    @item.Address
+                                                </td>
+                                                <td>
+                                                    <b>Country:</b>
+                                                    <br />
+                                                    @item.Country
+                                                    <br />
+                                                    <b>City:</b>
+                                                    <br />
+                                                    @item.City
+                                                </td>
+                                                <td>@item.PaymentMethod</td>
+                                                <td>@item.ProductSale.ToString("F2")</td>
+
+                                            </tr>
+                                            totalPrice += item.ProductSale;
+                                            totalSale += item.PurchasePrice;
+                                        }
+
+
+                                        <tr>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th>Total Sale</th>
+                                            <th> @totalPrice.ToString("F2")</th>
+                                        </tr>
+                                        <tr>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th>Total Purchase</th>
+                                            <th> @totalSale.ToString("F2")</th>
+                                        </tr>
+                                        <tr>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th>Total Profit </th>
+                                            <th>@((totalPrice - totalSale).ToString("F2"))</th>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+    <script>
+        function printSectionAsPDF() {
+            const element = document.getElementById("sectionToPrint");
+            html2pdf().from(element).save("ProfitLossReport.pdf");
+        }
+        document.getElementById("printButton").addEventListener("click", printSectionAsPDF);
+    </script>
+    <script>
+        function downloadExcel() {
+            var table = document.getElementById("sectionToPrint");
+            var workbook = XLSX.utils.book_new();
+            var worksheet = XLSX.utils.table_to_sheet(table);
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+            var excelData = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
+            var blob = new Blob([excelData], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+            var link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "Profit Loss Report.xlsx";
+            link.click();
+        }
+    </script>
+
+}

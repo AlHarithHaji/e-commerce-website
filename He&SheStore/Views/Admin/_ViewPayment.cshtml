@@ -1,0 +1,46 @@
+﻿@model He_SheStore.Models.PaymentDetail
+<div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title" id="PartyTitle">Customer Payment Method</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form >      
+        <div class="modal-body">
+           <div class="row">
+                <div class="col-md-12">
+                    <label class="col-sm-6 col-form-label">Card Holder Name</label>
+                    <div class="col-sm-12">
+                        <input type="text" asp-for="CardName" class="form-control" readonly>
+                        <span class="text-danger" id="CategoryNameErr"></span>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <label class="col-sm-6 col-form-label">Card Holder number</label>
+                    <div class="col-sm-12">
+                        <input type="text" asp-for="cardNumber" class="form-control" readonly>
+                        <span class="text-danger" id="CategoryNameErr"></span>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <label class="col-sm-6 col-form-label">Card Expiry Date</label>
+                    <div class="col-sm-12">
+                        <input type="text" asp-for="ExpiryDate" class="form-control" readonly>
+                        <span class="text-danger" id="CategoryNameErr"></span>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <label class="col-sm-6 col-form-label">Card Holder CVV</label>
+                    <div class="col-sm-12">
+                        <input type="text" asp-for="CVV" class="form-control" readonly>
+                        <span class="text-danger" id="CategoryNameErr"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+    </form>
+</div>

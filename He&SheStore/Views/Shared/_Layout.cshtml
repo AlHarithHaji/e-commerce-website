@@ -1,0 +1,245 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/assets/css/style.css">
+    <link rel="stylesheet" href="~/assets/css/form.css">
+    <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+    <link href="~/assets/css/testimonial.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"
+          integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    <title>He&She Store</title>
+
+</head>
+
+<body>
+    <header>
+        <div class="navbar-Sofine">
+            <nav>
+                <div class="custom-container">
+                    <div class="desktop-nav-view">
+                        <div class="row align-items-center">
+                            <div class="col-md-5 ">
+                                <div id="navbar">
+                                    <ul>
+                                        <li class="nav-parent-li">
+                                            <a href="/Home/Index" class="nav-parent-a a-hover">Home</a>
+                                        </li>
+                                        <li class="nav-parent-li">
+                                            <a href="/Home/Shop" class="nav-parent-a a-hover">Shop</a>
+                                        </li>
+                                        <li class="nav-parent-li">
+                                            <a href="/Home/About" class="nav-parent-a a-hover">About</a>
+                                        </li>
+                                        <li class="nav-parent-li">
+                                            <a href="/Home/Contactus" class="nav-parent-a a-hover">Contact</a>
+                                        </li>
+                                        <li class="nav-parent-li">
+                                            <a href="/Home/testimonialwrite" class="nav-parent-a a-hover">Testimonial </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="text-center">
+                                    <img src="~/assets/img/logo/Logo.png" class="" alt="">
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="nav-images">
+                                    <ul>
+                                        @if (User.IsInRole("User"))
+                                        {
+                                            <li class="nav-parent-li">
+                                                $: @ViewBag.AccountBalance
+                                            </li>
+                                            <li class="nav-parent-li">
+
+                                            </li>
+                                            <li class="nav-parent-li">
+                                                <a href="/Home/UserDashborad" class="nav-parent-a a-hover">User Dashborad</a>
+                                            </li>
+                                            <li class="nav-parent-li">
+                                                <a href="/Home/Logout" class="nav-parent-a a-hover">Logout</a>
+                                            </li>
+
+
+                                        }
+                                        else if (User.IsInRole("SuperAdmin"))
+                                        {
+                                            <li class="nav-parent-li">
+                                                <a href="/Admin/Index" class="nav-parent-a a-hover">Admin Dashborad</a>
+                                            </li>
+
+                                        }
+                                        else if (User.IsInRole("GuestUser"))
+                                        {
+                                            <li class="nav-parent-li">
+                                                <a class="nav-parent-a a-hover">
+                                                    Guest User
+                                                </a>
+                                            </li>
+                                            <li class="nav-parent-li">
+                                                <a href="/Home/Logout" class="nav-parent-a a-hover">Logout</a>
+                                            </li>
+                                        }
+                                        else
+                                        {
+                                            <li class="nav-images-li">
+                                                <a href="/Identity/Account/Login">
+                                                    <i class="bi bi-person"></i>
+                                                </a>
+                                            </li>
+                                        }
+
+                                        <li class="nav-images-li position-relative">
+                                            <a href="/Home/Cart" id="cart-bar">
+                                                @if (ViewBag.CartCount > 0)
+                                                {
+                                                    <i class="bi bi-cart4"></i>
+                                                    <span class="nav-conter order-counter">@ViewBag.CartCount</span>
+                                                }
+                                                else
+                                                {
+                                                    <i class="bi bi-cart4"></i>
+
+                                                }
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        @RenderBody()
+
+    </main> <footer>
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div>                           
+                            <div class="footer-group">
+                                <h6 class="footer-heading">Let’s Talk</h6>
+
+                                <p class="footer-context">
+                                    <a href="">+962 (0)7 9882 0742</a>
+                                </p>
+                                <p class="footer-context">
+                                    <a href="">heshestore786@gmail.com</a>
+                                </p>
+                            </div>
+                            <div class="footer-group">
+                                <h6 class="footer-sub-heading">Find Us</h6>
+                                <p class="footer-context">
+                                    <a href="">9 Hroun ,  Al-Rashid St. Arjan</a>
+                                </p>
+                                <p class="footer-context">
+                                    <a href="">Jordan. </a>
+                                </p>
+                            </div>
+                            <div class="footer-group">
+                                <h6 class="footer-sub-heading">We Accept</h6>
+                                <img src="~/assets/img/icon/paymen_222x.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="footer-group">
+                            <h6 class="footer-heading">Get Help</h6>
+                        </div>
+                        <div class="footer-group">
+                            <ul class="footer-links">
+                                <li>
+                                    <a href="/Home/Index">Home</a>
+                                </li>
+                                <li>
+                                    <a href="/Home/Shop">Shop</a>
+                                </li>
+                                <li>
+                                    <a href="/Home/About">About</a>
+                                </li>
+                                <li>
+                                    <a href="/Home/Contactus">Contact us</a>
+                                </li>
+                                <li>
+                                    <a href="/Identity/Account/Login">Login</a>
+                                </li>
+                                <li>
+                                    <a href="/Identity/Account/Register">Register</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="footer-group">
+                            <h6 class="footer-heading">About Store</h6>
+                        </div>
+                        <div class="footer-group">
+                            <p class="footer-search-context">
+                                Welcome to He&She Store, where fashion meets style and quality. We are a premier destination for the latest trends in men's and women's fashion. At  He&She Store, we take pride in curating a diverse selection of clothing, accessories, and more to help you express your unique style.
+
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="footer-group">
+                            <h6 class="footer-heading">Let’s stay in touch</h6>
+                        </div>
+
+                        <div class="footer-group">
+                            <p class="footer-search-context">
+                                Keep up to date with our latest news and special offers.
+                            </p>
+                        </div>
+                        <div class="footer-group">
+                            <h6 class="footer-heading">Follow Us</h6>
+                        </div>
+                        <div class="footer-group">
+                            <ul class="footer-social-icons">
+                                <li>
+                                    <a href=""><i class="bi bi-facebook" title="Share on Facebook"></i></a>
+                                </li>
+                                <li>
+                                    <a href=""><i class="bi bi-twitter" title="Share on Twitter"></i></a>
+                                </li>
+                                <li>
+                                    <a href=""><i class="bi bi-envelope-fill" title="Share on Email"></i></a>
+                                </li>
+                                <li>
+                                    <a href=""><i class="bi bi-whatsapp" title="Share on Whatsapp"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="~/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/js/main.js"></script>
+    <script src="~/assets/js/query.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+
+</html>

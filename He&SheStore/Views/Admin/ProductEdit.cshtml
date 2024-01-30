@@ -1,0 +1,367 @@
+﻿@model He_SheStore.ViewModel.ProductViewModel
+@inject He_SheStore.ViewModel.InjectSize InjectSize
+@{
+    ViewData["Title"] = "ProductEdit";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+
+    #CategoryList > li > label {
+        display: inline-block;
+        font-weight: 400 !important;
+    }
+
+    .preview-image-wrapper {
+        background: #fafbfc;
+        border: 1px solid rgba(195, 207, 216, .3);
+        display: inline-block;
+        height: 150px;
+        max-height: 150px;
+        max-width: 150px;
+        min-height: 150px;
+        min-width: 150px;
+        overflow: hidden;
+        position: relative;
+        text-align: center;
+        vertical-align: middle;
+        width: 150px;
+    }
+
+        .preview-image-wrapper img {
+            height: 150px;
+            max-width: 100%;
+        }
+
+    .btn_remove_image,
+    .btn_remove {
+        background: #ddd;
+        border-radius: 50% !important;
+        color: #000;
+        display: inline-block;
+        font-size: 18px;
+        height: 30px;
+        line-height: 30px;
+        position: absolute;
+        right: 5px;
+        text-align: center;
+        top: 5px;
+        width: 30px;
+    }
+
+    .image-box-actions a {
+        color: #337ab7 !important;
+        text-shadow: none !important;
+    }
+
+    .card-danger:not(.card-outline) > .card-header {
+        background-color: #4b545c !important;
+    }
+
+    #image_preview {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 160px));
+        width: 100%;
+        gap: 20px;
+    }
+
+    .image-box-actions {
+        text-align: center;
+        margin: 10px 0;
+    }
+
+        .image-box-actions a {
+            border: 1px solid #eee;
+            padding: 5px 20px;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+
+            .image-box-actions a:hover {
+                box-shadow: 1px 1px 180px #dc3545 inset;
+                color: #fff !important;
+            }
+
+    input[type="checkbox"] {
+        transform: scale(1.5);
+        margin-right: 15px;
+    }
+</style>
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Dashborad</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Product</a></li>
+                    <li class="breadcrumb-item active">Create</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="content">
+    <div class="container-fluid">
+        <form asp-action="ProductEdit" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <input type="hidden" asp-for="Id" />
+                <div class="col-md-9">
+                    <div class="card card-danger">
+                        <div class="card-header">
+                            <h3 class="card-title">Edit Product </h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Name">Name <span class="text-danger">*</span></label>
+                                        <input type="text" asp-for="ProductName" class="form-control" placeholder="Enter Product Name">
+                                        <span asp-validation-for="ProductName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Name">Available quantity <span class="text-danger">*</span></label>
+                                        <input type="number" asp-for="available" class="form-control" placeholder="Enter available quantity">
+                                        <span asp-validation-for="available" class="text-danger"></span>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="Name">Sale Price <span class="text-danger">*</span></label>
+                                        <input type="number" asp-for="ProductPrice" class="form-control" placeholder="Enter Sale Price">
+                                        <span asp-validation-for="ProductPrice" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="Name">Purchase Price <span class="text-danger">*</span></label>
+                                        <input type="number" asp-for="PurchasePrice" class="form-control" placeholder="Enter Purchase Price">
+                                        <span asp-validation-for="PurchasePrice" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="Name">Add product Size <span class="text-danger">*</span></label>
+                                <br />
+                                @{
+                                    var sizes = await InjectSize.productSizes(Model.Id);
+                                    var sSize = "";
+                                    var xSize = "";
+                                    var mSize = "";
+                                    var lSize = "";
+                                    var xlSize = "";
+                                    foreach (var item in sizes)
+                                    {
+                                        if (item.Name == "XS")
+                                        {
+                                            xSize = "checked";
+                                        }
+                                        else if (item.Name == "S")
+                                        {
+                                            sSize = "checked";
+                                        }
+                                        else if (item.Name == "M")
+                                        {
+                                            mSize = "checked";
+                                        }
+                                        else if (item.Name == "L")
+                                        {
+                                            lSize = "checked";
+                                        }
+                                        else if (item.Name == "XL")
+                                        {
+                                            xlSize = "checked";
+                                        }
+                                    }
+                                }
+                                <label>X Small :</label><input class="ml-3" type="checkbox" required name="ProductSize[]" value="XS" @sSize>
+                                <label>Small :</label><input class="ml-3" type="checkbox" required name="ProductSize[]" value="S" @sSize>
+                                <label>Medium: </label><input class="ml-3" type="checkbox" name="ProductSize[]" value="M" @mSize>
+                                <label>Large: </label><input class="ml-3" type="checkbox" name="ProductSize[]" value="L" @lSize>
+                                <label>X Large: </label><input class="ml-3" type="checkbox" name="ProductSize[]" value="XL" @xlSize>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Description</label>
+
+                                <textarea class="form-control" asp-for="ProductDescription" rows="9" placeholder="Product description"
+                                          cols="50" id="description"></textarea>
+                                <span asp-validation-for="ProductDescription" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class="col-md-3">
+                    <div class="card card-danger">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                Publish
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <div class="row">
+
+                                    <div class="col-md-5 text-center">
+                                        <input type="submit" class="btn btn-primary" value="Update" style="font-size: 14px;" />
+                                       
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+
+                    <div class="card card-danger">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                Categories <span class="text-warning">*</span>
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="input-group mb-3">
+
+                                        <select asp-for="CategoryId" asp-items="@ViewBag.Itemss" class="form-control">
+                                            <option selected disabled>Select Category</option>
+                                        </select>
+                                        <span asp-validation-for="CategoryId" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="card card-danger">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                Product Image
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="input-group">
+                                        <div class="image-box">
+                                            <input type="hidden" asp-for="ProductPicture" />
+                                            <img class="ml-4" src="~/ProductImage/@Model.ProductPicture" style="height:150px; width:150px; border:double" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card card-danger">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                Chnage Product Product Image?
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="input-group mb-3">
+                                        <div class="image-box">
+                                            <input type="file" asp-for="ProductFile" id="Image" onchange="readURL(this);" style="display:none" accept="image/*" />
+                                            <div class="preview-image-wrapper">
+                                                <img src="https://ultranews.thesky9.com/vendor/core/core/base/images/placeholder.png"
+                                                     alt="Preview image" id="preview_image" title="Remove image" width="150"
+                                                     data-default="https://ultranews.thesky9.com/vendor/core/core/base/images/placeholder.png" />
+                                                <a class="btn_remove" title=""><i class="fa fa-times"></i></a>
+                                            </div>
+                                            <div class="image-box-actions">
+                                                <a href="javascript:void(0);" class="btn_gallery" onclick="$('#Image').trigger('click');"
+                                                   data-result="image" data-action="select-image" data-allow-thumb="1">
+                                                    Choose image
+                                                </a>
+                                            </div>
+                                            <span asp-validation-for="ProductPicture" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+</section>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#preview_image')
+                        .attr('src', e.target.result)
+                        .width(150)
+                        .height(200);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        var imagesPreview = function (input, placeToInsertImagePreview) {
+            if (input.files) {
+                var filesAmount = input.files.length;
+                for (i = 0; i < filesAmount; i++) {
+                    var reader = new FileReader();
+                    reader.onload = function (event) {
+                        document.getElementsByClassName("preview-image-wrapper")[0].style.display = 'none';
+                        $("#image_preview").append(`<div class="preview-image-wrapper">` +
+                            `<img src="${event.target.result}" alt="Preview image" class="preview_image" title="Remove image" width="150" data-default="${event.target.result}" />` +
+                            `<a class="btn_remove_image" title=""><i class="fa fa-times"></i></a></div>`);
+                        $(".btn_remove_image").click(function () {
+                            $(this).parent(".preview-image-wrapper").remove();
+                        });
+                    }
+                    reader.readAsDataURL(input.files[i]);
+                }
+            } else {
+                $("#image_preview").html("<div class='preview-image-wrapper'><img src='https://ultranews.thesky9.com/vendor/core/core/base/images/placeholder.png' alt='Preview image' class='preview_image' title='Remove image' width='150' data-default='https://ultranews.thesky9.com/vendor/core/core/base/images/placeholder.png' /></div>");
+            }
+        };
+
+        function readImages(input) {
+            imagesPreview(input, 'div.preview-image-wrapper');
+        }
+
+        function RemoveImage(x) {
+            let filesAmount = document.getElementsByClassName("preview-image-wrapper");
+            filesAmount[x].remove();
+        }
+
+        $(".btn_remove").click(function () {
+            $('#preview_image')
+                .attr('src', 'https://ultranews.thesky9.com/vendor/core/core/base/images/placeholder.png')
+                .css({
+                    height: '150px',
+                    maxWidth: '100%'
+                });
+            $("#Image").val('');
+        });
+    </script>
+}

@@ -1,0 +1,152 @@
+﻿@model IEnumerable<He_SheStore.Models.Contactus>
+@{
+    ViewData["Title"] = "ProductIndex";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Dashborad</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Contact</a></li>
+                    <li class="breadcrumb-item active">Index</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title text-center" style="float: left">List of Contact Messages</h3>
+
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="ContactDataTable" width="100%" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Subject</th>
+                                        <th>Email</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        <th>Message</th>
+                                        <th>Action</th>
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+
+                                    {
+                                        <tr>
+                                            <td>@item.FirstName @item.LastName</td>
+                                            <td>@item.MessageSubject</td>
+
+                                            <td>@item.CustomerEmail</td>
+                                            <td>@item.MessageDate</td>
+                                            <td>@item.MessagesStatus</td>
+                                            <td>
+                                                <a href="javascript:void(0)" onclick="Message('@item.Id')" class="btn btn-info btn-sm">
+                                                    <span class="btn-icon"><i class="fas fa-eye"></i></span>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="javascript:void(0)" onclick="Delete('@item.Id')" class="btn btn-info btn-sm">Read</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalOpen">
+    <div class="modal-dialog modal-lg" id="jsAddMessage">
+
+
+    </div>
+
+</div>
+
+@section Scripts {
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        $('#ContactDataTable').DataTable({
+            autoWidth: false,
+            columnDefs: [
+                {
+                    targets: ['_all'],
+                    className: 'mdc-data-table__cell',
+                },
+            ],
+
+        });
+
+        function Delete(id) {
+            swal({
+                title: "Are you sure?",
+                text: "You have ready the customer message",
+                type: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            url: "/Admin/ReadMessages",
+                            type: "POST",
+                            data: {
+                                id: id
+                            },
+                            dataType: "json",
+                            success: function () {
+                                swal("Done!", "It was succesfully Move to Other Page!", "success");
+                                window.location.href = '../Admin/ContactUsMessages';
+                            },
+                            error: function (xhr, ajaxOptions, thrownError) {
+                                swal("Error deleting!", "Please try again", "error");
+                            }
+                        });
+                    } else {
+                        swal("Your imaginary file is safe!");
+                    }
+                });
+        }
+
+        function Message(id) {
+            $.ajax({
+                url: "/Admin/ContactUsMessagesDetail",
+                method: "GET",
+                data: {
+                    id: id
+                },
+                success: function (data) {
+                    $("#jsAddMessage").html(data);
+                    $('#modalOpen').modal({ backdrop: 'static', keyboard: false }, 'show');
+                },
+                error: function (e) {
+                    alert(e);
+                }
+            });
+        }
+    </script>
+}
+

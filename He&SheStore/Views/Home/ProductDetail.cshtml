@@ -1,0 +1,489 @@
+﻿@model He_SheStore.ViewModel.ProductShopViewModel
+@{
+    ViewData["Title"] = "ProductDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<string> allSizes = new List<string>();
+    foreach (var productSize in ViewBag.size)
+    {
+        allSizes.Add(productSize.Name);
+    }
+
+    string[] desiredSizes = { "XS", "S", "M", "L", "XL" };
+    string formattedSizes = string.Join(" ", desiredSizes.Where(size => allSizes.Contains(size)));
+}
+}
+<style>
+    .product-img-wrap {
+        text-align: center;
+    }
+
+    .Product-detail-ul {
+        margin: 0;
+        padding: 0;
+    }
+
+        .Product-detail-ul li {
+            list-style: none;
+            display: inline-block;
+            padding-right: 10px;
+            font-size: 12px;
+        }
+
+            .Product-detail-ul li a {
+                text-decoration: none;
+                color: black;
+                transition: all 200ms ease-in-out;
+            }
+
+                .Product-detail-ul li a:hover {
+                    text-decoration: none;
+                    color: #d93939;
+                    transition: all 200ms ease-in-out;
+                }
+
+            .Product-detail-ul li::after {
+                content: "\203A";
+                font-size: 15px;
+                margin-left: 10px;
+            }
+
+            .Product-detail-ul li:last-child::after {
+                content: "" !important;
+            }
+
+            .Product-detail-ul li:last-child a {
+                color: gray;
+            }
+
+    .product-title-wrap {
+        margin: 20px 0;
+    }
+
+    .product-title {
+        font-size: 35px;
+        font-weight: 600;
+    }
+
+    .Diacounted-Price {
+        color: grey;
+        margin-right: 10px;
+    }
+
+    .pro-detail-divider {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .description-p {
+        font-size: 14px;
+    }
+
+    .product-color-selection {
+        padding: 10px 0;
+    }
+
+    .c-option {
+        height: 28px;
+        width: 28px;
+        /* background-color: #d93939; */
+        display: inline-block;
+        border-radius: 100px;
+    }
+
+    .color-checks {
+        list-style: none;
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    .c-option::before {
+        content: " ";
+        height: 34px;
+        width: 34px;
+        display: inline-block;
+        border: 1px solid transparent;
+        position: relative;
+        top: -3px;
+        right: 3px;
+        border-radius: 32px;
+    }
+
+    .Active-Color .c-option::before {
+        border: 1px solid grey;
+    }
+
+    .size-li {
+        display: inline-block;
+        margin-right: 20px;
+        padding: 10px 20px;
+        border: 1px solid lightgray;
+        color: grey;
+    }
+
+    .Active-Size {
+        color: black;
+        border-color: gray;
+    }
+
+    .Quantity-section {
+        display: flex;
+        gap: 15px;
+    }
+
+    .quantity-group {
+        border: 3px solid lightgray;
+        height: 50px;
+        min-width: 170px;
+        border-radius: 3px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .quantity-buttons {
+        font-size: 30px;
+        margin: 0;
+        padding: 0 15px;
+        cursor: pointer;
+    }
+
+    .P_Quantity {
+        margin: 0;
+        font-size: 20px;
+    }
+
+    .Deleivery-title {
+        margin: 10px 0;
+    }
+
+    .detail-pro-p {
+        margin-bottom: 20px;
+    }
+
+    .Additional-info li {
+        display: flex;
+        width: 100%;
+        list-style: none;
+        border-bottom: 1px solid lightgray;
+        gap: 20px;
+    }
+
+        .Additional-info li p {
+            margin: 0px;
+            padding: 15px 0;
+            font-size: 14px;
+        }
+
+    .Info-name {
+        min-width: 140px;
+    }
+
+        .Info-name p {
+            font-weight: 900;
+        }
+
+    .product-reviews {
+        margin-top: 20px;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+
+        .product-reviews h4 {
+            color: #333;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .product-reviews ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .product-reviews li {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+        }
+
+    .add-review-form {
+        margin-top: 20px;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+
+        .add-review-form h4 {
+            color: #333;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .add-review-form form {
+            margin-top: 10px;
+        }
+
+        .add-review-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .add-review-form input[type="number"],
+        .add-review-form textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        .add-review-form button {
+            background-color: #d93939;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+            .add-review-form button:hover {
+                background-color: #333;
+            }
+</style>
+<div class='staic-banner'>
+    <div class="container">
+        <h2>Shop</h2>
+        <p class="Static-navigation">
+            <a href="index.html">Home</a>
+            <i class="bi bi-chevron-right"></i>
+            <a>Product Detail</a>
+        </p>
+    </div>
+</div>
+<br />
+<br />
+<div class="product-Detail">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="produc-img">
+                    <div class="product-img-wrap">
+                        <img src="~/ProductImage/@Model.DetailProduct.ProductPicture" alt="" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="product-decription mb-3">
+                    <div class="productDet-navigation">
+                        <span>
+                            <ul class="Product-detail-ul">
+                                <li>
+                                    <a href="/Home/Index">Home</a>
+                                </li>
+                                <li>
+                                    <a href="/Home/Shop">Shoes</a>
+                                </li>
+                                <li>
+                                    <a href="">product Detail</a>
+                                </li>
+                            </ul>
+                        </span>
+                    </div>
+                    <div class="product-title-wrap">
+                        <h3 class="product-title">@Model.DetailProduct.ProductName</h3>
+                    </div>
+                    <div class="Pricing-Section">
+                        <h3 class="Product-price">
+                            <span class="actuall-price">$@Model.DetailProduct.ProductPrice</span>
+                        </h3>
+                    </div>
+                    <hr class="pro-detail-divider" />
+                    <div class="product-description ">
+                        <span class="actuall-price"> <h5 style="font-weight:bold">Short Description:</h5>  </span>
+                        <p class="description-p">
+                            @{
+                                var description = Model.DetailProduct.ProductDescription;
+                                var words = description.Split(' ');
+                                if (words.Length > 40)
+                                {
+                                    description = string.Join(" ", words.Take(40));
+                                    description += " ...";
+                                }
+                                @description
+                            }
+                        </p>
+                    </div>
+                    <hr class="pro-detail-divider" />
+
+                    <div class="product-size-selection">
+                        <p class="size-title">
+                            <strong>Size :</strong> <span id="selected-size"></span>
+                        </p>
+                        <div>
+                            <div class="size-group">
+                                <p class="size-group-label"></p>
+
+                                <ul class="size-list">
+                                    @foreach (var item in ViewBag.size)
+                                    {
+                                        <li><span class="size-span" onclick="chooseSize('@item.Name')">@item.Name</span></li>
+                                    }
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="pro-detail-divider" />
+                    <div class="product-order-section">
+                        <div class="Quantity-section mt-3">
+
+                            <button class="default-button hover-button w-100" onClick="handleAddToCart()">
+                                Add To Cart
+                            </button>
+                        </div>
+                        <div class="deleiver-time mt-5">
+                            <p class="Deleivery-title">
+                                <strong>
+                                    <Truck />
+                                    &nbsp;Estimated Deleivery :
+                                </strong>
+                                Express <span>With in 14 days</span>
+                            </p>
+                        </div>
+                    </div>
+                    <hr class=" pro-detail-divider" />
+                    <div class="share-option mt-4">
+                        <div class="share-option-wrap">
+                            <p>
+                                <strong>Share :</strong>
+                                <i class="bi bi-facebook"></i>
+                                &nbsp;
+                                <i class="bi bi-instagram"></i>
+                                &nbsp;
+                                <i class="bi bi-twitter"></i>
+                            </p>
+                        </div>
+                    </div>
+                    <hr class="pro-detail-divider" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Add this section to display reviews -->
+    <div class="product-reviews">
+        <h4>Customer Reviews</h4>
+        <ul>
+            @foreach (var review in Model.ProductReviews)
+            {
+                <li>
+                    <p>Rating: @review.Rating</p>
+                    <p>Comment: @review.Comment</p>
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="add-review-form">
+        <h4>Add Your Review</h4>
+        <form asp-action="AddReview" method="post">
+            <input type="hidden" name="productId" value="@Model.DetailProduct.Id" />
+
+            <label for="rating">Rating:</label>
+            <input type="number" name="rating" min="1" max="5" required />
+
+            <label for="comment">Comment:</label>
+            <textarea name="comment" required></textarea>
+
+            <button type="submit">Submit Review</button>
+        </form>
+    </div>
+
+    <div class="container">
+
+        <div class="Additional-info-section mb-5">
+            <div class="text-center">
+                <h3 class="mb-5 mt-5">Additional information</h3>
+            </div>
+            <ul class="Additional-info">
+                <li>
+                    <div class="Info-name">
+                        <p>Catagory</p>
+                    </div>
+                    <div class="Info-points">
+                        <p>@Model.DetailProduct.Category.CategoryName</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="Info-name">
+                        <p>Sizes</p>
+                    </div>
+                    <div class="Info-points">
+                        <p>
+                            <span>@formattedSizes</span>
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <div class="Info-name">
+                        <p>Stock Available  </p>
+                    </div>
+                    <div class="Info-points">
+                        <p>@Model.DetailProduct.ProductQuantity </p>
+                    </div>
+                </li>
+                <li>
+                    <div class="Info-name">
+                        <p>Detail </p>
+                    </div>
+                    <div class="Info-points">
+                        <p>@Model.DetailProduct.ProductDescription </p>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+
+        var Sizespan = document.getElementById("selected-size");
+        var size = null;
+        function chooseSize(e) {
+            Sizespan.innerHTML = e;
+            size = e;
+        }
+
+             function handleAddToCart() {
+                 if (size)
+                 {
+        var productId = '@Model.DetailProduct.Id';
+
+        var form = document.createElement('form');
+        form.method = 'post';
+        form.action = '/Home/Buy';
+
+        var sizeIdInput = document.createElement('input');
+        sizeIdInput.type = 'hidden';
+        sizeIdInput.name = 'sizeId';
+        sizeIdInput.value = size;
+        form.appendChild(sizeIdInput);
+
+        var idInput = document.createElement('input');
+        idInput.type = 'hidden';
+        idInput.name = 'id';
+        idInput.value = productId;
+        form.appendChild(idInput);
+
+        document.body.appendChild(form);
+        form.submit();
+                 }
+                 else
+                 {
+        alert('Please select a size before adding to the cart.');
+    }
+}
+
+    </script>
+}

@@ -1,0 +1,580 @@
+﻿@model He_SheStore.ViewModel.ProductListViewModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<style>
+    .default-button.text-capitalize.hover-button {
+        text-decoration: none;
+    }
+    .banner-button.hover-button {
+        text-decoration: none;
+    }
+    .banner-button.hover-button.animate__animated animate__fadeInUp {
+        text-decoration: none;
+    }
+</style>
+<div class="banner">
+    <div id="carouselExampleIndicators" class="carousel carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-indicators slider-indecators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                    class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner d-flex align-items-center">
+            <div class="carousel-item active">
+                <div class="banner-wrap-img">
+                    <img src="~/assets/img/banner/banner1.webp" class="baner-animation" alt="">
+                </div>
+                <div class="banner-wrap-label">
+                    <div class="banner-heading-div">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <p class="banner-collection-content animate__animated  animate__slideInRight animate__slow">
+                                        Summer Collection 2023
+                                    </p>
+                                    <span>
+                                        <h1 class="banner-heading  animate__animated  animate__slideInRight animate__slow">
+                                           All kind of product
+                                        </h1>
+                                        <h1 class="banner-heading animate__animated animate__slideInLeft animate__slow">
+                                           is now aviable for sale!
+                                        </h1>
+                                    </span>
+                                    <p class="banner-collection-content2 animate__animated animate__fadeInUp">
+                                        Casual pieces for chilling at home.
+                                    </p>
+                                    <a class="banner-button hover-button animate__animated animate__fadeInUp" href="/Home/Shop">
+                                        Explore
+                                        More
+                                    </a>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="banner-wrap-img">
+                    <img src="~/assets/img/banner/banner2.webp" class="baner-animation" alt="">
+                 </div>
+                    <div class="banner-wrap-label">
+                        <div class="banner-heading-div">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <p class="banner-collection-content animate__animated  animate__slideInRight animate__slow">
+                                            Summer Collection 2023
+                                        </p>
+                                        <span>
+                                            <h1 class="banner-heading  animate__animated  animate__slideInRight animate__slow">
+                                                All kind of product
+                                            </h1>
+                                            <h1 class="banner-heading animate__animated animate__slideInLeft animate__slow">
+                                                is now aviable for sale!
+                                            </h1>
+                                        </span>
+                                        <p class="banner-collection-content2 animate__animated animate__fadeInUp">
+                                            Casual pieces for chilling at home.
+                                        </p>
+                                        
+                                        <a class="banner-button hover-button animate__animated animate__fadeInUp" href="/Home/Shop">
+                                            Explore
+                                            More
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <div class="carousel-item">
+                <div class="banner-wrap-img">
+                    <img src="~/assets/img/banner/banner3.jpg" class="baner-animation" alt="">
+                </div>
+                <div class="banner-wrap-label">
+                    <div class="banner-heading-div">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <p class="banner-collection-content animate__animated  animate__slideInRight animate__slow">
+                                        Summer Collection 2023
+                                    </p>
+                                    <span>
+                                        <h1 class="banner-heading  animate__animated  animate__slideInRight animate__slow">
+                                            All kind of product
+                                        </h1>
+                                        <h1 class="banner-heading animate__animated animate__slideInLeft animate__slow">
+                                            is now aviable for sale!
+                                        </h1>
+                                    </span>
+                                    <p class="banner-collection-content2 animate__animated animate__fadeInUp">
+                                        Casual pieces for chilling at home.
+                                    </p>
+                                    <a class="banner-button hover-button animate__animated animate__fadeInUp" href="/Home/Shop">
+                                        Explore
+                                        More
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="carousel-control-prev sliders-button mx-3 shadow" type="button"
+                    data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <i class="bi bi-arrow-left"></i>
+            </button>
+            <button class="carousel-control-next sliders-button mx-3 shadow" type="button"
+                    data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <i class="bi bi-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+    </div>
+<div class="products-cover">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                <div class="product-cover-wrap">
+                    <div class="product-cover-img-wrap">
+                        <img src="~/assets/img/product-cover/section_boots.jpg" alt="">
+                        <div class="product-cover-context large-cover ">
+                            <h1 class="heading-25px">
+                                Boots & Sneakers Essentials
+                            </h1>
+                            <p class="product-cover-para">From the world’s best brands.</p>
+                            <span class="product-price-spap">
+
+                            </span>
+                            <a class="default-button text-capitalize hover-button" href="/Home/Shop"> Dicover Now</a>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="product-cover-wrap">
+                    <div class="product-cover-img-wrap">
+                        <img src="~/assets/img/product-cover/section_pink_sneakers.jpg" alt="">
+                        <div class="product-cover-context small-cover ">
+                            <div class="bottom-text">
+                                <h3>Slip Sneakers</h3>
+                                <span class="product-price-spap">
+                                </span>
+                                <a class="default-button text-capitalize hover-button" href="/Home/Shop"> Shop now</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="product-cover-wrap">
+                    <div class="product-cover-img-wrap">
+                        <img src="~/assets/img/product-cover/Section_white_sneakers.jpg" alt="">
+                        <div class="product-cover-context small-cover ">
+                            <div class="bottom-text">
+                                <h3>Men’s Perforated Sneakers</h3>
+                                <span class="product-price-spap">
+                                </span>
+                                <a class="default-button text-capitalize hover-button" href="/Home/Shop"> Shop now</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- cards -->
+<div class="cards-section">
+    <div class="text-center">
+        <h1 class="mb-5">New Products</h1>
+    </div>
+    <div id="carouselExampleControls" class="carousel carousel-dark slide">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="card-wrapper container-sm d-flex  justify-content-around">
+                    <div class="row">
+                        @foreach (var item in Model.FirstProduct)
+                        {
+                            <div class="  col-lg-3 col-md-4 col-sm-6">
+                                <div class="custom-card">
+                                    <div class="card-img">
+                                        <!-- static-img -->
+                                        <div class="card-static-img">
+                                            <img src="~/ProductImage/@item.ProductPicture"
+                                                 alt="">
+                                        </div>
+                                        <!-- dicount-new-badges -->
+                                        <div class="card-badge">
+                                            <div class="new-badge d-inline-block">
+                                                <span>new</span>
+                                            </div>
+                                        </div>
+
+                                        <!-- bottom-card-badges -->
+                                        <div class="card-bottom-inner-bar">
+                                            <div class="inner-bar-badge">
+                                                @if (item.ProductQuantity > 0)
+                                                {
+                                                    if (User.IsInRole("User"))
+                                                    {
+                                                        <a asp-action="ProductDetail" asp-route-id="@item.Id" title="Add to Cart">
+                                                            <i class="bi bi-cart"></i>
+                                                        </a>
+                                                    }
+                                                    else if (User.IsInRole("GuestUser"))
+                                                    {
+                                                        <h6 class="text-danger text-center">Only view the product</h6>
+                                                    }
+                                                    else
+                                                    {
+                                                        <h6 class="text-danger text-center">Please Login First then you able to buy</h6>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <h6>Sold out</h6>
+                                                }
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="card-detail">
+                                        <div class="card-product-label">
+                                            <!-- porduct-label -->
+                                            <h6>@item.ProductName</h6>
+                                        </div>
+
+                                        <!-- product-price -->
+                                        <div class="product-price-section">
+                                            <h3 class="price">
+                                                <span class="Currency">$</span>@item.ProductPrice
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="card-wrapper container-sm d-flex  justify-content-around">
+                    <div class="row">
+                        @foreach (var item in Model.SecondProduct)
+                        {
+                            <div class="  col-lg-3 col-md-4 col-sm-6">
+                                <div class="custom-card">
+                                    <div class="card-img">
+                                        <!-- static-img -->
+                                        <div class="card-static-img">
+                                            <img src="~/ProductImage/@item.ProductPicture"
+                                                 alt="">
+                                        </div>
+
+                                        <div class="card-badge">
+
+                                            <div class="new-badge d-inline-block">
+                                                <span>new</span>
+                                            </div>
+                                        </div>
+
+                                        <!-- bottom-card-badges -->
+                                        <div class="card-bottom-inner-bar">
+                                            <div class="inner-bar-badge">
+
+                                                @if (item.ProductQuantity > 0)
+                                                {
+
+                                                    if (User.IsInRole("User"))
+                                                    {
+                                                        <a asp-action="ProductDetail" asp-route-id="@item.Id" title="Add to Cart">
+                                                            <i class="bi bi-cart"></i>
+                                                        </a>
+                                                    }
+                                                    else if (User.IsInRole("GuestUser"))
+                                                    {
+                                                        <h6 class="text-danger text-center">Only view the product</h6>
+                                                    }
+                                                    else
+                                                    {
+                                                        <h6 class="text-danger text-center">Please Login First then you able to buy</h6>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <h6>Soled out</h6>
+                                                }
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="card-detail">
+                                        <div class="card-product-label">
+                                            <!-- porduct-label -->
+                                            <h6>@item.ProductName</h6>
+                                        </div>
+
+                                        <!-- product-price -->
+                                        <div class="product-price-section">
+                                            <h3 class="price">
+                                                <span class="Currency">$</span>@item.ProductPrice
+                                            </h3>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="card-wrapper container-sm d-flex  justify-content-around">
+                    <div class="row">
+                        @foreach (var item in Model.SecondProduct)
+                        {
+                            <div class="  col-lg-3 col-md-4 col-sm-6">
+                                <div class="custom-card">
+                                    <div class="card-img">
+                                        <!-- static-img -->
+                                        <div class="card-static-img">
+                                            <img src="~/ProductImage/@item.ProductPicture"
+                                                 alt="">
+                                        </div>
+
+                                        <div class="card-badge">
+
+                                            <div class="new-badge d-inline-block">
+                                                <span>new</span>
+                                            </div>
+                                        </div>
+
+                                        <!-- bottom-card-badges -->
+                                        <div class="card-bottom-inner-bar">
+                                            <div class="inner-bar-badge">
+
+                                                @if (item.ProductQuantity > 0)
+                                                {
+
+                                                    if (User.IsInRole("User"))
+                                                    {
+                                                        <a asp-action="ProductDetail" asp-route-id="@item.Id" title="Add to Cart">
+                                                            <i class="bi bi-cart"></i>
+                                                        </a>
+                                                    }
+                                                    else if (User.IsInRole("GuestUser"))
+                                                    {
+                                                        <h6 class="text-danger text-center">Only view the product</h6>
+                                                    }
+                                                    else
+                                                    {
+                                                        <h6 class="text-danger text-center">Please Login First then you able to buy</h6>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <h6>Soled out</h6>
+                                                }
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="card-detail">
+                                        <div class="card-product-label">
+                                            <!-- porduct-label -->
+                                            <h6>@item.ProductName</h6>
+                                        </div>
+
+                                        <!-- product-price -->
+                                        <div class="product-price-section">
+                                            <h3 class="price">
+                                                <span class="Currency">$</span>@item.ProductPrice
+                                            </h3>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+
+                </div>
+            </div>
+            <button class="carousel-control-prev product-slider sliders-button mx-3 shadow" type="button"
+                    data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                <i class="bi bi-arrow-left"></i>
+            </button>
+            <button class="carousel-control-next product-slider sliders-button mx-3 shadow" type="button"
+                    data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                <i class="bi bi-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<h1 class="mb-5 text-center">testimonial</h1>
+
+<div class="testimonial">
+    <div class="testimonial-wrap">
+        <div id="carouselExampleFade"
+             class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                @foreach (var item in Model.testimonial.Select((value, index) => new { value, index }))
+                {
+                    <div class="carousel-item @(item.index == 0 ? "active" : "")">
+                        <div class="testimonial-card">
+                            <div>
+                                <h4 class="testimonial-heading">
+                                    @item.value.FirstName @item.value.LsdtName
+                                </h4>
+                            </div>
+                            <div>
+                                <p class="testimonial-description">@item.value.ReviewAbout</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+           @* <div class="carousel-inner">
+                @foreach (var item in Model.testimonial)
+                {
+                    <div class="carousel-item active">
+                        <div class="testimonial-card">
+                           
+                            <div>
+                                <h4 class="testimonial-heading">
+                                    @item.FirstName  @item.LsdtName
+                                </h4>
+                            </div>
+                            <div>
+                                <p class="testimonial-description">@item.ReviewAbout</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
+            </div>*@
+            <button class="carousel-control-prev  sliders-button mx-3 shadow test-button-left" type="button"
+                    data-bs-target="#carouselExampleFade"
+                    data-bs-slide="prev">
+                <i class="bi bi-arrow-left"></i>
+            </button>
+            <button class="carousel-control-next  sliders-button mx-3 shadow test-button-right" type="button"
+                    data-bs-target="#carouselExampleFade"
+                    data-bs-slide="next">
+                <i class="bi bi-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+</div>
+<!-- poster starts here -->
+<br />
+<br />
+<div class="poster">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6"></div>
+            <div class="col-md-6">
+                <p class="banner-collection-content">
+                    Summer Collection 2023
+                </p>
+                <span>
+                    <h1 class="banner-heading">
+                        Final Sales Items
+                    </h1>
+                    <h1 class="banner-heading ">
+                        many product is now avaible!
+                    </h1>
+                </span>
+                <p class="banner-collection-content2 ">
+                    Casual pieces for chilling at home.
+                </p>
+                <a class="banner-button hover-button" href="/Home/Shop">
+                    Explore
+                    More
+                </a>
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- customer care -->
+<div class="customer-care">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="customer-care-wrap">
+                    <div>
+                        <i class="bi bi-box c-care-icon"></i>
+                    </div>
+                    <div>
+                        <h6 class="c-care-heading">Pickup at any Store</h6>
+                        <span class="c-care-context">Free shipping on orders over $65</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="customer-care-wrap">
+                    <div>
+                        <i class="bi bi-arrow-repeat c-care-icon"></i>
+                    </div>
+                    <div>
+                        <h6 class="c-care-heading">Free returns</h6>
+                        <span class="c-care-context">30-days free return policy</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="customer-care-wrap">
+                    <div>
+                        <i class="bi bi-credit-card c-care-icon"></i>
+                    </div>
+                    <div>
+                        <h6 class="c-care-heading">Secured payments</h6>
+                        <span class="c-care-context">We accept all major credit cards</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="customer-care-wrap">
+                    <div>
+                        <i class="bi bi-headset c-care-icon"></i>
+                    </div>
+                    <div>
+                        <h6 class="c-care-heading">Customer service</h6>
+                        <span class="c-care-context">Top notch customer service</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

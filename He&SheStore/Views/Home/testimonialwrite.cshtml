@@ -1,0 +1,86 @@
+﻿@model He_SheStore.Models.testimonial
+@{
+    ViewData["Title"] = "testimonialwrite";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class='staic-banner'>
+    <div class="container">
+        <h2>Review</h2>
+        <p class="Static-navigation">
+            <a href="/Home/Index">Home</a>
+            <i class="bi bi-chevron-right"></i>
+            <a>Review</a>
+        </p>
+    </div>
+</div>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <form action="testimonialwrite" method="post">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="techno-input-group">
+                            <label for="" class="techno-label">First name<span>*</span></label>
+                            <div class="techno-icon-input">
+                                <span><i class="bi bi-person"></i></span>
+                                <input type="text" placeholder="text" asp-for="FirstName" required>
+                            </div>
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="techno-input-group">
+                            <label for="" class="techno-label">Last name<span>*</span></label>
+                            <div class="techno-icon-input">
+                                <span><i class="bi bi-person"></i></span>
+                                <input type="text" placeholder="text" asp-for="LsdtName" required>
+                            </div>
+                            <span asp-validation-for="LsdtName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="techno-input-group">
+                            <label for="" class="techno-label">Email<span>*</span></label>
+                            <div class="techno-icon-input">
+                                <span><i class="bi bi-envelope"></i></span>
+                                <input type="text" placeholder="email" asp-for="Email" required>
+                            </div>
+                            <span asp-validation-for="Email" class="text-danger"></span>
+
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="techno-input-group">
+                            <label for="" class="techno-label">Review<span>*</span></label>
+                            <div class="techno-icon-textarea">
+                                <textarea type="text" asp-for="ReviewAbout" placeholder="Share Your Thoughts" required></textarea>
+                            </div>
+                            <span asp-validation-for="ReviewAbout" class="text-danger"></span>
+
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-end">
+                        <button class="default-button text-Uppercase hover-button">
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+        
+}

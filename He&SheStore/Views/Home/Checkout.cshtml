@@ -1,0 +1,320 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using He_SheStore.Areas.Identity.Data
+@model He_SheStore.DTO.OrderDTO
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class='staic-banner'>
+    <div class="container">
+        <h2>Checkout</h2>
+        <p class="Static-navigation">
+            <a href="/Home/Index">Home</a>
+            <i class="bi bi-chevron-right"></i>
+            <a>Checkout</a>
+        </p>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="container mt-4 mb-4">
+        <form id="form" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div>
+                        <h2 class="checkout-heading">Enter Shipping Detail</h2>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="techno-input-group">
+                                <label for="" class="techno-label">First Name<span>*</span></label>
+                                <div class="techno-icon-input">
+                                    <span><i class="bi bi-person"></i></span>
+                                    <input type="text" asp-for="FirstName" placeholder="First Name">
+                                </div>
+                                <span class="text-danger" asp-validation-for="FirstName"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="techno-input-group">
+                                <label for="" class="techno-label">Last Name<span>*</span></label>
+                                <div class="techno-icon-input">
+                                    <span><i class="bi bi-person"></i></span>
+                                    <input type="text" asp-for="LastName" placeholder="Last Name">
+                                </div>
+                                <span class="text-danger" asp-validation-for="LastName"></span>
+
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="techno-input-group">
+                                <label for="" class="techno-label">Email<span>*</span></label>
+                                <div class="techno-icon-input">
+                                    @if (SignInManager.IsSignedIn(User))
+                                    {
+                                        <span><i class="bi bi-envelope"></i></span>
+                                        <input type="text" placeholder="Email" asp-for="Email" value="@UserManager.GetUserName(User)" readonly>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="techno-input-group">
+                                <label for="" class="techno-label">Phone<span>*</span></label>
+                                <div class="techno-icon-input">
+                                    <span><i class="bi bi-sign-turn-right-fill"></i></span>
+                                    <input type="number" asp-for="Mobile" placeholder="Phone Number">
+                                </div>
+                                <span class="text-danger" asp-validation-for="Mobile"></span>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="techno-input-group">
+                                <label for="" class="techno-label">Country<span>*</span></label>
+                                <div class="techno-icon-input">
+                                    <span><i class="bi bi-sign-turn-right-fill"></i></span>
+                                    <input type="text" asp-for="Country" placeholder="Country">
+                                </div>
+                                <span asp-validation-for="Country" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="techno-input-group">
+                                <label for="" class="techno-label">City<span>*</span></label>
+                                <div class="techno-icon-input">
+                                    <span><i class="bi bi-sign-turn-right-fill"></i></span>
+                                    <input type="text" asp-for="City" placeholder="City">
+                                </div>
+                                <span class="text-danger" asp-validation-for="City"></span>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="techno-input-group">
+                                <label for="" class="techno-label">Zip Code<span>*</span></label>
+                                <div class="techno-icon-input">
+                                    <span><i class="bi bi-sign-turn-right-fill"></i></span>
+                                    <input type="number" asp-for="PostalCode" placeholder="Zip code">
+                                </div>
+                                <span class="text-danger" asp-validation-for="PostalCode"></span>
+
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="techno-input-group">
+                                <label for="" class="techno-label">Address<span>*</span></label>
+                                <div class="techno-icon-input">
+                                    <span><i class="bi bi-sign-turn-right-fill"></i></span>
+                                    <input type="text" asp-for="Address" placeholder="Adress">
+                                </div>
+                                <span class="text-danger" asp-validation-for="Address"></span>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="mt-5">
+                        <h2 class="checkout-heading">Enter Payment Method</h2>
+                    </div>
+
+                    <div>
+                        <div class="row">
+                            <div class="col-md-12 my-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" asp-for="OrderType"
+                                           id="flexRadioDefault1" value="Cash" checked>
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        Cash On Delivery
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" asp-for="OrderType"
+                                           id="flexRadioDefault2" value="Credit">
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        Credit / Debit Card
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="techno-input-group">
+                                    <label for="" class="techno-label">Card Number<span>*</span></label>
+                                    <div class="techno-icon-input">
+                                        <span><i class="bi bi-credit-card"></i></span>
+                                        <input type="text" id="cardNumber" name="CardHolderNumber" placeholder="XXXX XXXX XXXX XXXX">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="techno-input-group">
+                                    <label for="" class="techno-label">Name<span>*</span></label>
+                                    <div class="techno-icon-input">
+                                        <span><i class="bi bi-person"></i></span>
+                                        <input type="text" asp-for="CardHolderName" placeholder="Name on Card">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="techno-input-group">
+                                    <label for="" class="techno-label">Expiry Date<span>*</span></label>
+                                    <div class="techno-icon-input">
+                                        <span><i class="bi bi-calendar"></i></span>
+                                        <input type="date" asp-for="ExpiryDate" placeholder="MM/YY">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="techno-input-group">
+                                    <label for="" class="techno-label">CVV Code<span>*</span></label>
+                                    <div class="techno-icon-input">
+                                        <span><i class="bi bi-code"></i></span>
+                                        <input id="cvvInput" type="number" asp-for="CardCvvCode" placeholder="CVV">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div>
+                        <h2 class="checkout-heading">Your Billing</h2>
+
+                    </div>
+                    <div class="cart_ui_block mt-4">
+                        <div class="Billing-section">
+                            <h5>Billing</h5>
+
+                            <table class="billing-table">
+                                <tbody>
+                                    <tr>
+                                        <td>Subtotal :</td>
+                                        <td>$ @ViewBag.Total</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Shipping Charge :</td>
+                                        <td>$ 10</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total :</td>
+                                        <td>$ @(ViewBag.Total + 10) </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                    <div class="col-md-12 mt-5">
+                        <div class="text-end">
+                           
+                                <input type="submit" class=" default-button text-Uppercase hover-button" value="Order Now" />
+
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+</div>
+<br />
+<br />
+<br />
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        document.getElementById('cardNumber').addEventListener('input', formatCardNumber);
+
+        function formatCardNumber() {
+            const cardNumber = this.value;
+            const cleanedCardNumber = cardNumber.replace(/[\s-]/g, '');
+            const digitsOnly = cleanedCardNumber.replace(/\D/g, '');
+            let formattedCardNumber = '';
+            for (let i = 0; i < digitsOnly.length; i += 4) {
+                formattedCardNumber += digitsOnly.slice(i, i + 4) + ' ';
+            }
+            formattedCardNumber = formattedCardNumber.trim();
+            this.value = formattedCardNumber;
+            if (digitsOnly.length === 16) {
+                if (/^4/.test(digitsOnly)) {
+
+                } else if (/^5/.test(digitsOnly)) {
+
+                } else {
+                    alert('Please enter a valid Visa or debit card number.');
+                }
+            }
+        }
+    </script>
+    <script>
+        const cvvInput = document.getElementById('cvvInput');
+        cvvInput.addEventListener('input', function () {
+            const cvv = this.value;
+            if (cvv.length > 3) {
+                this.value = cvv.slice(0, 3);
+            }
+        });
+    </script>
+    <script>
+        $("#form").submit(function (e) {
+            e.preventDefault();
+            var submitButton = $(this).find('input[type="submit"]');
+            submitButton.prop("disabled", true);
+            var paymentMethod = $("input[name='OrderType']:checked").val();
+            if (paymentMethod === "Cash") {
+                $.ajax({
+                    url: "/Home/CheckOut",
+                    method: "POST",
+                    data: $("#form").serialize(),
+                    dataType: "JSON",
+                    success: function (response) {
+                        if (response.success) {
+                            alert(response.errors);
+                            window.location.href = '../Home/Index';
+                        }
+                        else {
+                            alert("Validation errors: " + response.errors);
+                        }
+                        submitButton.prop("disabled", false);
+                    }
+                });
+            } else if (paymentMethod === "Credit") {
+                var formDataArray = $("#form").serializeArray();
+                var cardNumber = $("#cardNumber").val();
+                formDataArray.push({ name: "CardHolderNumber", value: cardNumber });
+                var formDataSerialized = $.param(formDataArray);
+                $.ajax({
+                    url: "/Home/CheckOut",
+                    method: "POST",
+                    data: formDataSerialized,
+                    dataType: "JSON",
+                    success: function (response) {
+                        if (response.success) {
+                            alert(response.errors);
+                            window.location.href = '../Home/Index';
+                        } else {
+                            alert("Validation errors: " + response.errors);
+                        }
+                        submitButton.prop("disabled", false);                   
+                    },
+                    error: function (error) {
+                        submitButton.prop("disabled", false);
+                        alert(error);
+                    }
+                });
+            }
+        });
+    </script>
+
+
+}

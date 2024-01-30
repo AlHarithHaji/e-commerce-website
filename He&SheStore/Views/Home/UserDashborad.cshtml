@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewData["Title"] = "UserDashborad";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    #container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 60vh;
+    }
+
+    .card {
+        width: 250px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin: 0 10px;
+        border-radius: 10px;
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+    }
+
+        .card i {
+            font-size: 36px;
+            color: #007bff;
+            margin: 10px 0;
+        }
+
+        .card h2 {
+            font-size: 24px;
+            margin: 10px 0;
+        }
+
+        .card p {
+            font-size: 16px;
+        }
+
+    .profile-card {
+        background-color: #f7f7f7;
+    }
+
+    .order-tracking-card {
+        background-color: #e6f7ff;
+    }
+
+    .order-history-card {
+        background-color: #f7ffe6;
+    }
+
+</style>
+<div class='staic-banner'>
+    <div class="container">
+        <h2>UserDashborad</h2>
+        <p class="Static-navigation">
+            <a href="/Home/Index">Home</a>
+            <i class="bi bi-chevron-right"></i>
+            <a>User Dashbord</a>
+        </p>
+    </div>
+</div>
+<div id="container">
+    <a href="/Home/Profile" class="card profile-card">
+        <img src="~/assets/img/icon/profile-svgrepo-com.svg" style="height:64px;width:64px" />
+        <h2>My Profile</h2>
+        <p>Your profile details here.</p>
+    </a>
+    <a href="/Home/AccountIndex" class="card profile-card">
+        <img src="~/assets/img/icon/Money.svg" style="height:64px;width:64px" />
+        <h2>Account </h2>
+        <p>Personal Bank amount.</p>
+    </a>
+    <a href="/Home/OrderTracking" class="card order-tracking-card">
+        <img src="~/assets/img/icon/delivery_709790.png" style="height:64px;width:64px" />
+        <h2>Order Tracking</h2>
+        <p>Track your orders.</p>
+    </a>
+    <a href="/Home/OrderHistory" class="card order-history-card">
+        <img src="~/assets/img/icon/shopping_bag_icon.png" />
+        <h2>Order History</h2>
+        <p>View your order history.</p>
+    </a>
+</div>

@@ -1,0 +1,117 @@
+﻿@model IEnumerable<He_SheStore.ViewModel.OrderViewModel>
+@{
+    ViewData["Title"] = "OrderHistory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int index = 1;
+}
+
+<style>
+   
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    thead {
+        background-color: #000;
+        color: #fff;
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+   
+</style>
+<div class='staic-banner'>
+    <div class="container">
+        <h2>UserDashborad</h2>
+        <p class="Static-navigation">
+            <a href="/Home/Index">Home</a>
+            <i class="bi bi-chevron-right"></i>
+            <a class="mb-5">Order History</a>
+        </p>
+    </div>
+</div>
+<div class="container">
+    <h2 class="text-center">Order History</h2>
+    <br />
+    <div class="table-responsive">
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th>Sr</th>
+                    <th>Name</th>
+                    <th>Mobile#</th>
+                    <th>Adress</th>
+                    <th>Order#</th>
+                    <th>Date</th>
+                    <th>Product</th>
+                    <th>Category</th>
+                    <th>Size</th>
+                    <th>Picture</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@index</td>
+                        <td>@(item.FirstName + " " + item.LastName)</td>
+                        <td>@item.MobileNumber</td>
+                        <td>@item.Address</td>
+                        <td><b>@item.OrderNumber</b> </td>
+                        <td>@item.OrderDate</td>
+                        <td>@item.productName</td>
+                        <td>@item.CategoryName</td>
+                        <td>@item.ProductSize</td>
+                        <td><img src="~/ProductImage/@item.productPicture" style="height:60px; width:60px" /></td>
+                        <td>@item.ProductPrice</td>
+                        <td>@item.productQuantity</td>
+                        <td>$@item.Total</td>
+                      
+                        <td>
+                            @if (item.OrderStatus == "Patch")
+                            {
+                                <p>Order Pacth</p>
+                            }
+                            else if (item.OrderStatus == "Deliver")
+                            {
+                                <p>Deliver</p>
+                            }
+                            else if (item.OrderStatus == "Pending")
+                            {
+                                <a class="btn btn-warning text-center" asp-route-id="@item.orderid" asp-route-size="@item.ProductSize" asp-action="UpdateStatus" asp-controller="Home">Cancel</a>
+
+                            }
+                            else
+                            {
+                                <p>Already Cancel the order</p>
+                            }
+                        </td>
+                    </tr>
+                    index++;
+                }
+
+            </tbody>
+        </table>
+    </div>
+    
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />

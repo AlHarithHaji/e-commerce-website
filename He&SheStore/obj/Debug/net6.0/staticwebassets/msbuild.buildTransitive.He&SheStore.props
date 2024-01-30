@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\He&amp;SheStore.props" />
+</Project>

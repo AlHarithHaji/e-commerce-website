@@ -1,0 +1,209 @@
+﻿@model He_SheStore.ViewModel.ProductShopViewModel
+@{
+    ViewData["Title"] = "Privacy Policy";
+}
+<style>
+    .search-container {
+        display: flex;
+        max-width: 300px;
+        background-color: #f2f2f2;
+        border-radius: 25px;
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    }
+
+        .search-container input[type="text"] {
+            border: none;
+            outline: none;
+            background: none;
+            padding: 10px;
+            width: 90%;
+            font-size: 16px;
+        }
+
+        .search-container button {
+            border: none;
+            background: #333;
+            color: white;
+            border-radius: 0 25px 25px 0;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+            .search-container button:hover {
+                background: #555;
+            }
+    .suggestions {
+        border-top: 0;
+        border-radius: 0 0 4px 4px;
+        border-color: #ced4da;
+    }
+
+</style>
+<div class='staic-banner'>
+    <div class="container">
+        <h2>Shop</h2>
+        <p class="Static-navigation">
+            <a href="index.html">Home</a>
+            <i class="bi bi-chevron-right"></i>
+            <a>Shop</a>
+        </p>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <form asp-controller="Home" asp-action="Shop" method="post">
+                <div class="search-container">
+                    <input type="search" class="form-control search-input" name="productname" placeholder="Search by Product.." id="searchInput" />
+                    <div id="search-suggestions" class="suggestions search-input"></div>
+
+                </div>
+
+            </form>
+            
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="d-flex align-items-center justify-content-end">
+                <label class="mx-3">Select Catagory : </label>
+                <select class="form-control w-auto" id="categorySelect">
+                    <option value="-1">All Category</option>
+                    @foreach (var item in Model.Category)
+                    {
+                        <option value="@item.Id" data-categoryid="@item.Id">@item.CategoryName</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="shop-card-section">
+        <div class="row">
+            @if (Model.Product.Any())
+            {
+                foreach (var item in Model.Product)
+                {
+                    <div class="  col-lg-3 col-md-4 col-sm-6">
+                        <div class="custom-card">
+                            <div class="card-img">
+                                <!-- static-img -->
+                                <div class="card-static-img">
+                                    <img src="~/ProductImage/@item.ProductPicture" alt="">
+                                </div>
+
+                                <!-- dicount-new-badges -->
+                                <div class="card-badge">
+                                    <div class="new-badge d-inline-block">
+                                        <span>new</span>
+                                    </div>
+                                </div>
+
+                                <!-- bottom-card-badges -->
+                                <div class="card-bottom-inner-bar">
+                                    <div class="inner-bar-badge">
+
+                                        @if (item.ProductQuantity > 0)
+                                        {
+                                            if (User.IsInRole("User"))
+                                            {
+                                                <a asp-action="ProductDetail" asp-route-id="@item.Id" title="Add to Cart">
+                                                    <i class="bi bi-cart"></i>
+                                                </a>
+                                            }
+                                            else if (User.IsInRole("GuestUser"))
+                                            {
+                                                <h6 class="text-danger text-center">Only view the product</h6>
+                                            }
+                                            else
+                                            {
+                                                <h6 class="text-danger text-center">Please Login First then you able to buy</h6>
+                                            }
+
+
+                                        }
+                                        else
+                                        {
+                                            <h6 class="text-danger text-center">Sold Out</h6>
+                                        }
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="card-detail">
+                                <div class="card-product-label">
+                                    <!-- porduct-label -->
+                                    <h6>@item.ProductName</h6>
+                                </div>
+
+                                <!-- product-price -->
+                                <div class="product-price-section">
+                                    <h3 class="price">
+                                        <span class="Currency">$</span>@item.ProductPrice
+                                    </h3>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            }
+            else
+            {
+                <p class="text-center">No product Found</p>
+            }
+
+
+        </div>
+    </div>
+</div>
+
+<br />
+<br />
+<br />
+<br />
+<script>
+    function handleEnterKey(event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            document.querySelector('form').submit();
+        }
+    }
+
+    document.getElementById("searchInput").addEventListener("keypress", handleEnterKey);
+    function search(event) {
+        var searchInput = event.target.value;
+        localStorage.setItem('searchInput', searchInput);
+        updateSuggestions();
+    }
+    function updateSuggestions() {
+        var searchSuggestions = document.getElementById('search-suggestions');
+        searchSuggestions.innerHTML = '';
+        var storedSearchInput = localStorage.getItem('searchInput');
+        if (storedSearchInput) {
+            var suggestionItem = document.createElement('div');
+            suggestionItem.textContent = storedSearchInput;
+            suggestionItem.addEventListener('click', function () {
+                document.getElementById('searchInput').value = storedSearchInput;
+                document.querySelector('form').submit();
+            });
+            searchSuggestions.appendChild(suggestionItem);
+        }
+    }
+    window.addEventListener('load', updateSuggestions);
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#categorySelect').on('change', function () {
+            var selectedCategoryId = $(this).find(':selected').val();
+            if (selectedCategoryId != -1) {
+                var url = '/Home/Shop/' + selectedCategoryId; // Modify the URL structure as needed
+
+                // Redirect to the constructed URL
+                window.location.href = url;
+            }
+        });
+    });
+</script>

@@ -1,0 +1,72 @@
+﻿@page
+@model LoginModel
+@{
+    ViewData["Title"] = "Log in";
+    Layout = "~/Views/Shared/_Login.cshtml";
+}
+<div class="login-form-wrap">
+    <div class="text-center">
+        <h1 class="form-heading">Login</h1>
+    </div>
+    <form class="form form-login" id="account" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div>
+            <div class="techno-input-group">
+                <label for="" class="techno-label">Email<span>*</span></label>
+                <div class="techno-icon-input">
+                    <span><i class="bi bi-person-circle"></i></span>
+                    <input asp-for="Input.Email" class="form-control" placeholder="Email" autocomplete="username" aria-required="true" />
+                </div>
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+
+            </div>
+            <div class="techno-input-group">
+                <label for="" class="techno-label">Password<span>*</span></label>
+                <div class="techno-icon-input">
+                    <span><i class="bi bi-lock"></i></span>
+                    <input asp-for="Input.Password" class="form-control" placeholder="Password" autocomplete="current-password" aria-required="true" />
+                </div>
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+
+            </div>
+            <div class="techno-input-group">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <input class="form-check-input" id="Remember" asp-for="Input.RememberMe" />
+
+                        <label for="Remember" class="checkbox-label">Remember Me</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex justify-content-end">
+                            <a id="forgot-password" asp-page="./ForgotPassword" class="techno-forget-password">
+                                Forgot your
+                                password?
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" class="techno-forget-password">
+                            don't have Account?
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="techno-input-group">
+                <button class="default-button w-100 hover-button">Login</button>
+            </div>
+            <div class="w-75 mx-auto text-center">
+                <p class="techno-form-context">
+                    By providing your email address, you agree to our
+                    Privacy Policy and Terms of Service.
+                </p>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

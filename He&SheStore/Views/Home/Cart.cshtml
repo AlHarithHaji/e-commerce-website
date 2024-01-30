@@ -1,0 +1,204 @@
+﻿@model IEnumerable<He_SheStore.Models.ProductItem>
+@{
+    ViewData["Title"] = "Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int index = 1;
+    decimal totalWithoutAdditionalAmount = Model.Sum(item => item.Product.ProductPrice * item.Quantity);
+    decimal totalWithAdditionalAmount = totalWithoutAdditionalAmount;
+    ViewBag.Total = totalWithAdditionalAmount;
+}
+<style>
+    .quantity-field {
+        width: 50px; 
+        height: 20px; 
+        font-size: 14px; 
+        padding: 3px;
+        text-align: center;
+    }
+    .min{
+        text-decoration:none
+    }
+    span {
+        cursor: pointer;
+    }
+
+    .minus, .plus {       
+        background: #f2f2f2;
+        border-radius: 4px;
+        padding: 8px 5px 8px 5px;
+        border: 1px solid #ddd;
+        display: inline-block;
+        vertical-align: middle;
+        text-align: center;
+    }
+
+    input {
+        height: 34px;
+        width: 100px;
+        text-align: center;
+        font-size: 26px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        display: inline-block;
+        vertical-align: middle;
+			
+</style>
+<div class='staic-banner'>
+    <div class="container">
+        <h2>Cart</h2>
+        <p class="Static-navigation">
+            <a href="/Home/Index">Home</a>
+            <i class="bi bi-chevron-right"></i>
+            <a>Cart</a>
+        </p>
+    </div>
+</div>
+<br />
+<p class="text-center">Cart</p>
+<br />
+
+<div class="container-fluid">
+    <div class="container-fluid mt-4 mb-4">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="cart_ui_block">
+                    <table class="cart-table">
+                        <thead>
+                            <tr>
+                                <th style="width:30px">Sr.</th>
+                                <th>Name</th>
+                                <th>Size</th>
+                                <th>Image</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th style="width:70px">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Any())
+                            {
+                                @foreach (var item in Model)
+                                {
+                                    var total = item.Product.ProductPrice * item.Quantity;
+
+                                    <tr key={index}>
+                                        <td>@index</td>
+                                        <td>@item.Product.ProductName</td>
+                                        <td>@item.size</td>
+                                        <td>
+                                            <img src="~/ProductImage/@item.Product.ProductPicture" style="height:60px;width:60px" />
+                                        </td>
+                                        <td>
+                                            
+                                            <div class="number">
+                                                <a class="min" asp-action="minus" asp-route-id="@item.Product.Id" asp-route-sizeId="@item.size">
+
+                                                    <span class="minus">-</span>
+                                                </a>
+                                                <input type="text" value="@item.Quantity" min="1"  readonly />
+                                                <a class="min" asp-action="Add" asp-route-id="@item.Product.Id" asp-route-sizeId="@item.size">
+
+                                                    <span class="plus">+</span>
+                                                    </a>
+                                            </div>                                             
+                                           
+                                        </td>
+                                        <td>$@total</td>
+                                        <td>
+                                            <a class="btn btn-sm btn-danger" asp-action="Remove" asp-route-id="@item.Product.Id">
+                                                <i class="bi bi-trash"></i>
+                                            </a>
+                                            
+                                        </td>
+                                    </tr>
+                                    index++;
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <th colspan="5" class="text-center"> Your Cart is Ematy <a asp-action="Shop">Please click here to Continue shopping </a></th>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-3">
+                    <a href="/Home/Shop">
+                        <button class="default-button text-Uppercase hover-button">
+                            Return to Shop
+                        </button>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="cart_ui_block">
+                    <div class="Billing-section">
+                        <h5>Billing</h5>
+                        @if (ViewBag.Total > 10)
+                        {
+                            <table class="billing-table">
+                                <tbody>
+                                    <tr>
+                                        <td>Subtotal :</td>
+                                        <td>$ @totalWithAdditionalAmount</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Shipping Charge :</td>
+                                        <td>$ 10.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total :</td>
+                                        <td>$ @(ViewBag.Total + 10)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        }
+                        else
+                        {
+                            <table class="billing-table">
+                                <tbody>
+                                    <tr>
+                                        <td>Subtotal :</td>
+                                        <td>$ 0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Shipping Charge :</td>
+                                        <td>$ 0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total :</td>
+                                        <td>$ 0.00</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        }
+
+                    </div>
+                </div>
+                <div class="mt-3">
+
+                    @if (ViewBag.Total > 10)
+                    {
+                        <a href="/Home/Checkout">
+                            <button class="default-button text-Uppercase hover-button">
+                                Checkout
+                            </button>
+                        </a>
+                    }
+                    else
+                    {
+                        <p>Your Card is Empty</p>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+<br />
+<br />
+<br />

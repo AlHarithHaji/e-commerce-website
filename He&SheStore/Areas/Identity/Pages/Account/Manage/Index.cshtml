@@ -1,0 +1,74 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+}
+
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Dashboard</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Account</a></li>
+                    <li class="breadcrumb-item active">User Profile</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <partial name="_StatusMessage" for="StatusMessage" />
+        <form id="profile-form" method="post" asp-area="Identity" asp-page="/Account/Manage/Index">
+            <div class="row">
+                <div class="col-md-3">
+                    <ul class="nav nav-pills flex-column">
+                        <li class="nav-item"><a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Profile</a></li>
+                        <li class="nav-item"><a class="nav-link @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">Email</a></li>
+                        <li class="nav-item"><a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">Password</a></li>
+
+                    </ul>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="tab-content">
+
+                                <div class="form-group row">
+                                    <label for="inputName2" class="col-sm-2 col-form-label">Username</label>
+                                    <div class="col-sm-10">
+                                        <input asp-for="Username" class="form-control" disabled />
+
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label asp-for="Input.PhoneNumber" class="col-sm-2 form-label"></label>
+                                    <div class="col-sm-10">
+                                        <input asp-for="Input.PhoneNumber" class="form-control" />
+                                        <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="offset-sm-2 col-sm-10">
+                                        <button id="update-profile-button" type="submit" class="w-50 btn btn-lg btn-primary">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

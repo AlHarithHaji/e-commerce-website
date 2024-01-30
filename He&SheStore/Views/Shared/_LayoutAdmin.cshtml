@@ -1,0 +1,270 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>He&She Store</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="~/Admin/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="~/Admin/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <link rel="stylesheet" href="~/Admin/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <link rel="stylesheet" href="~/Admin/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="~/Admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="~/Admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/Admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/Admin/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                </li>
+
+
+            </ul>
+
+            <ul class="navbar-nav ml-auto">
+                <!-- Navbar Search -->
+                <partial name="_LoginPartial" />
+
+            </ul>
+        </nav>
+        <aside class="main-sidebar sidebar-light-primary elevation-4">
+
+            <a href="#" class="brand-link">
+                <span class="brand-text font-weight-light ml-3">He&She Store</span>
+            </a>
+            <div class="sidebar">
+
+
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+                        <li class="nav-header">All Services</li>
+
+                        @if (User.IsInRole("SuperAdmin"))
+                        {
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-action="Index" asp-controller="Admin">
+                                    <i class="nav-icon fas fa-home"></i>
+                                    <p>
+                                        Dashborad
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-action="CategoryIndex" asp-controller="Admin">
+                                    <i class="nav-icon fas fa-pager"></i>
+                                    <p>
+                                        Manage Category
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-action="ProductIndex" asp-controller="Admin">
+                                    <i class="nav-icon fas fa-pager"></i>
+                                    <p>
+                                        Manage Inventory
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-action="PendingOrderList" asp-controller="Admin">
+                                    <i class="nav-icon fas fa-people-arrows"></i>
+                                    <p>
+                                        Manage Pending Order
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-action="PatchOrderList" asp-controller="Admin">
+                                    <i class="nav-icon fas fa-code-branch"></i>
+                                    <p>
+                                        Manage Patch Order
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-action="DeliverOrderList" asp-controller="Admin">
+                                    <i class="nav-icon fas fa-chess-rook"></i>
+                                    <p>
+                                        Manage Deliver Order
+                                    </p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-action="UserList" asp-controller="Admin">
+                                    <i class="nav-icon fas fa-house-user"></i>
+                                    <p>
+                                        User List
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-action="GuestUserList" asp-controller="Admin">
+                                    <i class="nav-icon fas fa-place-of-worship"></i>
+                                    <p>
+                                        Guest User List
+                                    </p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-action="testimonial" asp-controller="Admin">
+                                    <i class="nav-icon fas fa-people-carry"></i>
+                                    <p>
+                                        Manage testimonial
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-action="testimonialread" asp-controller="Admin">
+                                    <i class="nav-icon fas fa-people-carry"></i>
+                                    <p>
+                                        Manage read testimonial 
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-action="ContactUs" asp-controller="Admin">
+                                    <i class="nav-icon fas fa-people-carry"></i>
+                                    <p>
+                                        Customer Support
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-action="ReadContactMessage" asp-controller="Admin">
+                                    <i class="nav-icon fas fa-people-arrows"></i>
+                                    <p>
+                                        All Read Message
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Profile" class="nav-link" id="ProfileTab">
+                                    <i class="nav-icon fas fa-user-check"></i>
+                                    <p>
+                                        Profile
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-house-damage"></i>
+                                    <p>
+                                        Application Resports
+                                        <i class="fas fa-angle-left right"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a asp-action="ProfitLossReport" asp-controller="Admin" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Profit Sales Reports</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a asp-action="CancelOrderList" asp-controller="Admin" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Cancel Order Reports</p>
+                                        </a>
+                                    </li>
+                                    @*<li class="nav-item">
+                        <a href="pages/UI/icons.html" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Icons</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="pages/UI/buttons.html" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Buttons</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="pages/UI/sliders.html" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Sliders</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="pages/UI/modals.html" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Modals & Alerts</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="pages/UI/navbar.html" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Navbar & Tabs</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="pages/UI/timeline.html" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Timeline</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="pages/UI/ribbons.html" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Ribbons</p>
+                        </a>
+                    </li>*@
+                                </ul>
+                            </li>
+
+                        }
+
+                    </ul>
+                </nav>
+
+            </div>
+
+        </aside>
+
+
+        <div class="content-wrapper">
+            @RenderBody()
+        </div>
+
+        <footer class="main-footer">
+            <div class="container">
+                &copy; 2023 - He&She Store
+            </div>
+        </footer>
+        <aside class="control-sidebar control-sidebar-dark">
+        </aside>
+
+    </div>
+
+    <script src="~/Admin/plugins/jquery/jquery.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="~/Admin/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+
+    <script src="~/Admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/Admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- DataTables  & Plugins -->
+    <script src="~/Admin/plugins/datatables/jquery.dataTables.min.js"></script>
+
+    <script src="~/Admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/Admin/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/Admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+
+    <script src="~/Admin/dist/js/adminlte.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>
